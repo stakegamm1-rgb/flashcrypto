@@ -41,6 +41,7 @@ import binance2Img from './assets/Images/binance2.jpeg';
 import binance3Img from './assets/Images/binance3.jpeg';
 import trustWalletImg from './assets/Images/trustwallet.jpeg';
 import lisanceImg from './assets/Images/lisance.jpeg';
+import softwareImg from './assets/Images/software.png';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -1153,7 +1154,8 @@ export default function App() {
             <p className="subpage-subtitle">Experience ultimate OTC automation, high-speed routing, and multi-network traversal.</p>
             
             <div className="subpage-content">
-              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '2.5rem', alignItems: 'start' }} className="software-page-grid">
+              <img src={softwareImg} alt="Flash USDT Software" style={{ width: '100%', borderRadius: '16px', marginBottom: '2.5rem', border: '1px solid var(--border-glass)', boxShadow: 'var(--glow-purple)' }} />
+              <div className="software-page-grid">
                 <div>
                   <h3>Institutional Swap Automation</h3>
                   <p>Our premium Flash USDT Software terminal is built for high-volume OTC operations. Designed with focus on speed, multi-node traversal, and absolute security, it is trusted by institutional desks and individual liquidity managers worldwide.</p>
