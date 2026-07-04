@@ -387,7 +387,7 @@ export default function App() {
                 Buy Now
               </button>
               <a 
-                href="https://wa.me/40758563968" 
+                href="https://wa.me/919588705078" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn-glow btn-outline"
@@ -938,7 +938,7 @@ export default function App() {
               <p>All cryptocurrency transactions (USDT, BTC) are executed directly on their respective blockchain networks (TRC20, ERC20, BEP20, Mainnet). Once a transaction has been confirmed on the distributed ledger, it is final, irreversible, and cannot be recalled or refunded.</p>
 
               <h3>3. WhatsApp Desk Rate-Locking</h3>
-              <p>Exchange rates and liquidity desk pricing details locked with our OTC operators via our official WhatsApp desk (40758563968) are valid for a maximum window of fifteen (15) minutes from the time of confirmation. Transactions completed outside this window are subject to repricing based on market spreads.</p>
+              <p>Exchange rates and liquidity desk pricing details locked with our OTC operators via our official WhatsApp desk (919588705078) are valid for a maximum window of fifteen (15) minutes from the time of confirmation. Transactions completed outside this window are subject to repricing based on market spreads.</p>
 
               <h3>4. Risks & Disclaimers</h3>
               <p>Cryptocurrency trading involves high volatility and financial risk. The Desk is not responsible for losses due to network failures, gas spikes, wallet key compromises, or client-side errors.</p>
@@ -1128,7 +1128,7 @@ export default function App() {
               
               <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
                 <a 
-                  href="https://wa.me/40758563968" 
+                  href="https://wa.me/919588705078" 
                   target="_blank" 
                   rel="noreferrer" 
                   style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}
@@ -1372,7 +1372,7 @@ export default function App() {
             <div>
               <h4 className="footer-col-title">Community</h4>
               <div className="footer-col-links">
-                <a href="https://wa.me/40758563968" target="_blank" rel="noreferrer" className="footer-col-link-item">
+                <a href="https://wa.me/919588705078" target="_blank" rel="noreferrer" className="footer-col-link-item">
                   WhatsApp Contact
                 </a>
                 <a href="https://whatsapp.com/channel/0029Vakbup91Hspodzr8Gj0u" target="_blank" rel="noreferrer" className="footer-col-link-item">
