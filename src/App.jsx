@@ -1090,11 +1090,11 @@ export default function App() {
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(6, 8, 20, 0.9)', padding: '1rem 1.25rem', borderRadius: '10px', border: '1px solid var(--neon-cyan)' }}
                 >
                   <code style={{ color: 'var(--neon-cyan)', wordBreak: 'break-all', fontSize: '1.05rem', fontWeight: '600' }}>
-                    TDKFARDWwGQDcShDvSynib1F4R7GA3Ptr9
+                    TR4wmP1f26GcFgSyZ5BNE31jtZTG7YK1Qm
                   </code>
                   <button 
                     onClick={() => {
-                      navigator.clipboard.writeText('TDKFARDWwGQDcShDvSynib1F4R7GA3Ptr9');
+                      navigator.clipboard.writeText('TR4wmP1f26GcFgSyZ5BNE31jtZTG7YK1Qm');
                       alert('Address copied to clipboard!');
                     }}
                     style={{ background: 'rgba(0, 240, 255, 0.1)', border: '1px solid rgba(0, 240, 255, 0.3)', borderRadius: '6px', padding: '0.4rem 0.6rem', color: 'var(--neon-cyan)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
@@ -1255,11 +1255,11 @@ export default function App() {
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(6, 8, 20, 0.9)', padding: '1rem 1.25rem', borderRadius: '10px', border: '1px solid var(--neon-cyan)' }}
                 >
                   <code style={{ color: 'var(--neon-cyan)', wordBreak: 'break-all', fontSize: '1.05rem', fontWeight: '600' }}>
-                    TDKFARDWwGQDcShDvSynib1F4R7GA3Ptr9
+                    TR4wmP1f26GcFgSyZ5BNE31jtZTG7YK1Qm
                   </code>
                   <button 
                     onClick={() => {
-                      navigator.clipboard.writeText('TDKFARDWwGQDcShDvSynib1F4R7GA3Ptr9');
+                      navigator.clipboard.writeText('TR4wmP1f26GcFgSyZ5BNE31jtZTG7YK1Qm');
                       alert('Address copied to clipboard!');
                     }}
                     style={{ background: 'rgba(0, 240, 255, 0.1)', border: '1px solid rgba(0, 240, 255, 0.3)', borderRadius: '6px', padding: '0.4rem 0.6rem', color: 'var(--neon-cyan)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
