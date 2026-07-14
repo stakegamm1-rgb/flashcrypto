@@ -45,7 +45,10 @@ import trustWalletImg from './assets/Images/trustwallet.jpeg';
 import lisanceImg from './assets/Images/lisance.jpeg';
 import softwareImg from './assets/Images/software.png';
 
-export default function App() {
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+
+function Home() {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
@@ -178,7 +181,7 @@ export default function App() {
   ];
 
   const processSteps = [
-    { step: "01", name: "Contact our team", desc: "Reach out via WhatsApp or Telegram to register your request." },
+    { step: "01", name: "Contact our team", desc: "Reach out via our Live Chat or Telegram to register your request." },
     { step: "02", name: "Confirm trade details", desc: "Our team locks in the current exchange rates and network fees." },
     { step: "03", name: "Secure payment", desc: "Complete the transaction payment through our verified security pathways." },
     { step: "04", name: "Crypto transferred", desc: "Your digital assets are dispatched instantly to your verified wallet." },
@@ -211,19 +214,19 @@ export default function App() {
     },
     {
       q: "Do you provide customer support?",
-      a: "Yes, we provide 24/7 dedicated support before, during, and after your transaction is completed. Our team ensures that client inquiries are addressed directly via WhatsApp or Telegram without any automated bot interfaces."
+      a: "Yes, we provide 24/7 dedicated support before, during, and after your transaction is completed. Our team ensures that client inquiries are addressed directly via our Live Chat or Telegram without any automated bot interfaces."
     }
   ];
 
   const testimonials = [
     {
-      quote: "Swapping high-volume USDT and BTC has never been this simple. Rates are locked directly on WhatsApp and trades clear in under 5 minutes.",
+      quote: "Swapping high-volume USDT and BTC has never been this simple. Rates are locked directly on Live Chat and trades clear in under 5 minutes.",
       author: "Marcus Vance",
       role: "Director, Vance Liquidity Group",
       badge: "VERIFIED OTC CLIENT"
     },
     {
-      quote: "Incredible speed and security. Moving substantial volumes of USDT-TRC20, having a reliable desk executing instantly on WhatsApp is a game-changer.",
+      quote: "Incredible speed and security. Moving substantial volumes of USDT-TRC20, having a reliable desk executing instantly on Live Chat is a game-changer.",
       author: "Sarah K.",
       role: "OTC Crypto Arbitrageur",
       badge: "VERIFIED TRADER"
@@ -241,7 +244,7 @@ export default function App() {
       badge: "VERIFIED FUND MANAGER"
     },
     {
-      quote: "Very reliable and fast. 24/7 client managers are incredibly responsive on WhatsApp. Transparent fees and safe wallet dispatch.",
+      quote: "Very reliable and fast. 24/7 client managers are incredibly responsive on Live Chat. Transparent fees and safe wallet dispatch.",
       author: "Priya S.",
       role: "Head of Operations, FinTech Solutions",
       badge: "VERIFIED PARTNER"
@@ -391,7 +394,7 @@ export default function App() {
                 Buy Now
               </button>
               <button 
-                onClick={() => setIsUserChatOpen(true)}
+                onClick={() => navigate('/chat')}
                 className="btn-glow btn-outline"
                 style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center', background: 'transparent', border: '1px solid var(--neon-cyan)', color: '#fff', cursor: 'pointer', fontFamily: 'inherit', fontSize: '1rem', padding: '0.75rem 1.5rem', borderRadius: '8px' }}
               >
@@ -497,7 +500,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Submit to WhatsApp */}
+              {/* Submit to Chat */}
               <button 
                 onClick={() => {
                   const amt = parseFloat(calcAmount);
@@ -945,8 +948,8 @@ export default function App() {
               <h3>2. Transaction Finality & Blockchains</h3>
               <p>All cryptocurrency transactions (USDT, BTC) are executed directly on their respective blockchain networks (TRC20, ERC20, BEP20, Mainnet). Once a transaction has been confirmed on the distributed ledger, it is final, irreversible, and cannot be recalled or refunded.</p>
 
-              <h3>3. WhatsApp Desk Rate-Locking</h3>
-              <p>Exchange rates and liquidity desk pricing details locked with our OTC operators via our official WhatsApp desk (919588705078) are valid for a maximum window of fifteen (15) minutes from the time of confirmation. Transactions completed outside this window are subject to repricing based on market spreads.</p>
+              <h3>3. Live Chat Rate-Locking</h3>
+              <p>Exchange rates and liquidity desk pricing details locked with our OTC operators via our official Live Chat are valid for a maximum window of fifteen (15) minutes from the time of confirmation. Transactions completed outside this window are subject to repricing based on market spreads.</p>
 
               <h3>4. Risks & Disclaimers</h3>
               <p>Cryptocurrency trading involves high volatility and financial risk. The Desk is not responsible for losses due to network failures, gas spikes, wallet key compromises, or client-side errors.</p>
@@ -1135,15 +1138,13 @@ export default function App() {
               </button>
               
               <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-                <a 
-                  href="https://wa.me/919588705078" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}
+                <button 
+                  onClick={() => navigate('/chat')}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
                 >
                   <MessageCircle size={16} className="neon-text-green" />
-                  Contact Support on WhatsApp
-                </a>
+                  Contact Support on Chat
+                </button>
               </div>
 
             </div>
@@ -1380,9 +1381,9 @@ export default function App() {
             <div>
               <h4 className="footer-col-title">Community</h4>
               <div className="footer-col-links">
-                <a href="https://wa.me/919588705078" target="_blank" rel="noreferrer" className="footer-col-link-item">
-                  WhatsApp Contact
-                </a>
+                <button onClick={() => navigate('/chat')} className="footer-col-link-item" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}>
+                  Chat Now
+                </button>
                 <a href="https://whatsapp.com/channel/0029Vakbup91Hspodzr8Gj0u" target="_blank" rel="noreferrer" className="footer-col-link-item">
                   WhatsApp Channel
                 </a>
@@ -1411,5 +1412,34 @@ export default function App() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+function ChatPage() {
+  const navigate = useNavigate();
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      width: '100vw', 
+      background: 'var(--bg-dark, #060814)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1rem',
+      boxSizing: 'border-box'
+    }}>
+      <UserChat onClose={() => navigate('/')} isPage={true} />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/chat" element={<ChatPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

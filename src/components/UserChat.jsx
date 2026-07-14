@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function UserChat({ onClose }) {
+export default function UserChat({ onClose, isPage }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [userId, setUserId] = useState('');
@@ -198,7 +198,21 @@ export default function UserChat({ onClose }) {
       initial={{ opacity: 0, y: 50, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 50, scale: 0.95 }}
-      style={{
+      style={isPage ? {
+        width: '100%',
+        maxWidth: '800px',
+        height: 'calc(100vh - 40px)',
+        maxHeight: '800px',
+        background: 'var(--panel-bg, rgba(6, 8, 20, 0.95))',
+        backdropFilter: 'blur(20px)',
+        border: '1px solid var(--border-glass, rgba(255,255,255,0.1))',
+        borderRadius: '24px',
+        display: 'flex',
+        flexDirection: 'column',
+        zIndex: 1000,
+        boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--glow-cyan, rgba(0, 240, 255, 0.1))',
+        overflow: 'hidden'
+      } : {
         position: 'fixed',
         bottom: '20px',
         right: '20px',
