@@ -427,7 +427,7 @@ function Home() {
                 <span>Buy Digital Assets</span>
                 <span 
                   className="calc-badge"
-                  onClick={() => setIsAdminDashboardOpen(true)}
+                  onClick={() => navigate('/admin')}
                   style={{ cursor: 'pointer' }}
                 >
                   Secure Desk
@@ -1406,11 +1406,7 @@ function Home() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {isAdminDashboardOpen && (
-          <AdminChatDashboard onClose={() => setIsAdminDashboardOpen(false)} />
-        )}
-      </AnimatePresence>
+
     </>
   );
 }
@@ -1433,12 +1429,30 @@ function ChatPage() {
   );
 }
 
+function AdminPage() {
+  const navigate = useNavigate();
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      width: '100vw', 
+      background: 'var(--bg-dark, #060814)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box'
+    }}>
+      <AdminChatDashboard onClose={() => navigate('/')} isPage={true} />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );

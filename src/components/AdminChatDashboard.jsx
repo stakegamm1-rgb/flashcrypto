@@ -4,7 +4,7 @@ import { X, Send, User, MessageSquare, Trash2, Image as ImageIcon, Loader2 } fro
 import { db } from '../firebase';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, doc, setDoc, deleteDoc, getDocs } from 'firebase/firestore';
 
-export default function AdminChatDashboard({ onClose }) {
+export default function AdminChatDashboard({ onClose, isPage = false }) {
   const [activeChats, setActiveChats] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -184,15 +184,26 @@ export default function AdminChatDashboard({ onClose }) {
   if (!isAuthenticated) {
     return (
       <div style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.8)',
-        backdropFilter: 'blur(10px)',
-        zIndex: 2000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem'
+        ...(isPage ? {
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+          boxSizing: 'border-box',
+          background: 'var(--bg-dark, #060814)'
+        } : {
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.8)',
+          backdropFilter: 'blur(10px)',
+          zIndex: 2000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '2rem'
+        })
       }}>
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
@@ -209,20 +220,22 @@ export default function AdminChatDashboard({ onClose }) {
             position: 'relative'
           }}
         >
-          <button 
-            onClick={onClose}
-            style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'none',
-              border: 'none',
-              color: '#fff',
-              cursor: 'pointer'
-            }}
-          >
-            <X size={20} />
-          </button>
+          {(!isPage || (isPage && onClose)) && (
+            <button 
+              onClick={onClose}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                background: 'none',
+                border: 'none',
+                color: '#fff',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={20} />
+            </button>
+          )}
           
           <h2 style={{ color: '#fff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <MessageSquare size={24} className="neon-text-cyan" /> Secure Desk Auth
@@ -272,43 +285,79 @@ export default function AdminChatDashboard({ onClose }) {
 
   return (
     <div style={{
-      position: 'fixed',
-      inset: 0,
-      background: 'rgba(0,0,0,0.8)',
-      backdropFilter: 'blur(10px)',
-      zIndex: 2000,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '2rem'
+      ...(isPage ? {
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxSizing: 'border-box',
+        background: 'var(--bg-dark, #060814)'
+      } : {
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.8)',
+        backdropFilter: 'blur(10px)',
+        zIndex: 2000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      })
     }}>
+      <style>{`
+        .admin-sidebar {
+          width: 300px;
+          border-right: 1px solid var(--border-glass, rgba(255,255,255,0.1));
+          display: flex;
+          flex-direction: column;
+          background: rgba(255,255,255,0.02);
+        }
+        .admin-chat-area {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+        }
+        @media (max-width: 768px) {
+          .admin-sidebar {
+            width: 100% !important;
+            border-right: none;
+            display: ${selectedChat ? 'none' : 'flex'} !important;
+          }
+          .admin-chat-area {
+            display: ${selectedChat ? 'flex' : 'none'} !important;
+          }
+          .admin-page-container {
+            border-radius: 0 !important;
+            height: 100vh !important;
+            max-width: 100% !important;
+            border: none !important;
+          }
+        }
+      `}</style>
       <motion.div 
+        className={isPage ? "admin-page-container" : ""}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         style={{
           width: '100%',
-          maxWidth: '1000px',
-          height: '80vh',
+          maxWidth: isPage ? '100%' : '1000px',
+          height: isPage ? '100vh' : '80vh',
           background: 'var(--panel-bg, #060814)',
-          border: '1px solid var(--border-glass, rgba(255,255,255,0.1))',
-          borderRadius: '16px',
+          border: isPage ? 'none' : '1px solid var(--border-glass, rgba(255,255,255,0.1))',
+          borderRadius: isPage ? '0' : '16px',
           display: 'flex',
           overflow: 'hidden',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.5), 0 0 20px var(--glow-cyan, rgba(0, 240, 255, 0.1))'
+          boxShadow: isPage ? 'none' : '0 20px 50px rgba(0,0,0,0.5), 0 0 20px var(--glow-cyan, rgba(0, 240, 255, 0.1))'
         }}
       >
         {/* Sidebar - Chat List */}
-        <div style={{
-          width: '300px',
-          borderRight: '1px solid var(--border-glass, rgba(255,255,255,0.1))',
-          display: 'flex',
-          flexDirection: 'column',
-          background: 'rgba(255,255,255,0.02)'
-        }}>
+        <div className="admin-sidebar">
           <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-glass, rgba(255,255,255,0.1))' }}>
             <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <MessageSquare size={20} className="neon-text-cyan" /> Secure Desk
+              <MessageSquare size={20} className="neon-text-cyan" /> Admin
             </h2>
           </div>
           
@@ -346,28 +395,36 @@ export default function AdminChatDashboard({ onClose }) {
         </div>
 
         {/* Main Area - Chat View */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
-          <button 
-            onClick={onClose}
-            style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'rgba(255,255,255,0.1)',
-              border: 'none',
-              borderRadius: '50%',
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              cursor: 'pointer',
-              zIndex: 10
-            }}
-          >
-            <X size={16} />
-          </button>
+        <div className="admin-chat-area">
+          {(!isPage || (isPage && selectedChat)) && (
+            <button 
+              onClick={() => {
+                if (isPage && selectedChat) {
+                  setSelectedChat(null);
+                } else if (onClose) {
+                  onClose();
+                }
+              }}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                background: 'rgba(255,255,255,0.1)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#fff',
+                cursor: 'pointer',
+                zIndex: 10
+              }}
+            >
+              <X size={16} />
+            </button>
+          )}
 
           {!selectedChat ? (
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
