@@ -1415,13 +1415,13 @@ function ChatPage() {
   const navigate = useNavigate();
   return (
     <div style={{ 
-      minHeight: '100vh', 
+      height: '100dvh', 
       width: '100vw', 
       background: 'var(--bg-dark, #060814)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '1rem',
+      padding: '0',
       boxSizing: 'border-box'
     }}>
       <UserChat onClose={() => navigate('/')} isPage={true} />
@@ -1433,12 +1433,13 @@ function AdminPage() {
   const navigate = useNavigate();
   return (
     <div style={{ 
-      minHeight: '100vh', 
+      height: '100dvh', 
       width: '100vw', 
       background: 'var(--bg-dark, #060814)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      padding: '0',
       boxSizing: 'border-box'
     }}>
       <AdminChatDashboard onClose={() => navigate('/')} isPage={true} />

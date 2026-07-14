@@ -330,7 +330,7 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
           }
           .admin-page-container {
             border-radius: 0 !important;
-            height: 100vh !important;
+            height: 100dvh !important;
             max-width: 100% !important;
             border: none !important;
           }
@@ -344,7 +344,7 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
         style={{
           width: '100%',
           maxWidth: isPage ? '100%' : '1000px',
-          height: isPage ? '100vh' : '80vh',
+          height: isPage ? '100dvh' : '80vh',
           background: 'var(--panel-bg, #060814)',
           border: isPage ? 'none' : '1px solid var(--border-glass, rgba(255,255,255,0.1))',
           borderRadius: isPage ? '0' : '16px',
@@ -480,7 +480,9 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
                         borderRadius: '16px',
                         borderBottomRightRadius: msg.sender === 'admin' ? '4px' : '16px',
                         borderBottomLeftRadius: msg.sender !== 'admin' ? '4px' : '16px',
-                        maxWidth: '70%',
+                        maxWidth: '85%',
+                        wordBreak: 'break-word',
+                        overflowWrap: 'break-word',
                         fontSize: '0.95rem'
                       }}
                     >
@@ -502,7 +504,7 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
               {/* Input */}
               <form 
                 onSubmit={handleSendMessage}
-                style={{ padding: '1.5rem', borderTop: '1px solid var(--border-glass, rgba(255,255,255,0.1))', display: 'flex', gap: '1rem' }}
+                style={{ padding: '1rem', borderTop: '1px solid var(--border-glass, rgba(255,255,255,0.1))', display: 'flex', gap: '0.5rem', flexShrink: 0 }}
               >
                 <input 
                   id="adminImageUpload"

@@ -201,12 +201,12 @@ export default function UserChat({ onClose, isPage }) {
       style={isPage ? {
         width: '100%',
         maxWidth: '800px',
-        height: 'calc(100vh - 40px)',
-        maxHeight: '800px',
+        height: '100dvh',
+        maxHeight: '100dvh',
         background: 'var(--panel-bg, rgba(6, 8, 20, 0.95))',
         backdropFilter: 'blur(20px)',
-        border: '1px solid var(--border-glass, rgba(255,255,255,0.1))',
-        borderRadius: '24px',
+        border: 'none',
+        borderRadius: '0',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 1000,
@@ -331,8 +331,9 @@ export default function UserChat({ onClose, isPage }) {
                 borderRadius: '16px',
                 borderBottomRightRadius: msg.sender === 'user' ? '4px' : '16px',
                 borderBottomLeftRadius: msg.sender !== 'user' ? '4px' : '16px',
-                maxWidth: '80%',
+                maxWidth: '85%',
                 wordBreak: 'break-word',
+                overflowWrap: 'break-word',
                 fontSize: '0.9rem'
               }}
             >
@@ -358,7 +359,8 @@ export default function UserChat({ onClose, isPage }) {
           padding: '1rem',
           borderTop: '1px solid var(--border-glass, rgba(255,255,255,0.1))',
           display: 'flex',
-          gap: '0.5rem'
+          gap: '0.5rem',
+          flexShrink: 0
         }}
       >
           <input 
