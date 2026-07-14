@@ -101,13 +101,13 @@ export default function UserChat({ onClose, isPage }) {
         setTimeout(async () => {
           try {
             await addDoc(collection(db, 'chats', userId, 'messages'), {
-              text: 'hi sir i am asim flash usdt seller how much you need flash ?',
+              text: 'Hello! I am Asim, your trusted Flash USDT provider. How much volume are you looking to purchase today?',
               sender: 'admin',
               timestamp: serverTimestamp()
             });
             await setDoc(chatRef, {
               lastUpdated: serverTimestamp(),
-              lastMessage: 'Admin: hi sir i am asim flash usdt seller how much you need flash ?',
+              lastMessage: 'Admin: Hello! I am Asim, your trusted Flash USDT provider. How much volume are you looking to purchase today?',
             }, { merge: true });
           } catch (autoErr) {
             console.error("Auto-reply failed:", autoErr);

@@ -149,7 +149,7 @@ export default function AdminChatDashboard({ onClose }) {
   const handleDeleteChat = async () => {
     if (!selectedChat) return;
     
-    if (window.confirm("Are you sure you want to completely delete this chat? This cannot be undone.")) {
+    if (window.confirm("Are you sure you want to clear this chat history? The user will remain in your list.")) {
       try {
         const messagesRef = collection(db, 'chats', selectedChat.id, 'messages');
         const snapshot = await getDocs(messagesRef);
@@ -158,13 +158,15 @@ export default function AdminChatDashboard({ onClose }) {
         const deletePromises = snapshot.docs.map(messageDoc => deleteDoc(messageDoc.ref));
         await Promise.all(deletePromises);
         
-        // Delete the main chat document
-        await deleteDoc(doc(db, 'chats', selectedChat.id));
+        // Update the main chat document instead of deleting it
+        await setDoc(doc(db, 'chats', selectedChat.id), {
+          lastMessage: 'Chat cleared by admin',
+          lastUpdated: serverTimestamp()
+        }, { merge: true });
         
-        setSelectedChat(null);
       } catch (error) {
-        console.error("Error deleting chat:", error);
-        alert("Failed to delete the chat.");
+        console.error("Error clearing chat:", error);
+        alert("Failed to clear the chat.");
       }
     }
   };
