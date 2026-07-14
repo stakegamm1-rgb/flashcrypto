@@ -33,6 +33,8 @@ import {
 } from 'lucide-react';
 import ParticleBackground from './components/ParticleBackground';
 import AnimatedCounter from './components/AnimatedCounter';
+import UserChat from './components/UserChat';
+import AdminChatDashboard from './components/AdminChatDashboard';
 
 // Layout assets
 import cryptoHeroImg from './assets/Images/crypto_hero.png';
@@ -48,6 +50,8 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'terms' | 'about' | 'license'
+  const [isUserChatOpen, setIsUserChatOpen] = useState(false);
+  const [isAdminDashboardOpen, setIsAdminDashboardOpen] = useState(false);
 
   // Scroll to top on page change
   useEffect(() => {
@@ -386,16 +390,14 @@ export default function App() {
               >
                 Buy Now
               </button>
-              <a 
-                href="https://wa.me/919588705078" 
-                target="_blank" 
-                rel="noreferrer" 
+              <button 
+                onClick={() => setIsUserChatOpen(true)}
                 className="btn-glow btn-outline"
-                style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}
+                style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center', background: 'transparent', border: '1px solid var(--neon-cyan)', color: '#fff', cursor: 'pointer', fontFamily: 'inherit', fontSize: '1rem', padding: '0.75rem 1.5rem', borderRadius: '8px' }}
               >
-                <Smartphone size={18} className="neon-text-green" />
-                Contact on WhatsApp
-              </a>
+                <MessageCircle size={18} className="neon-text-green" />
+                Chat now
+              </button>
             </div>
           </motion.div>
 
@@ -420,7 +422,13 @@ export default function App() {
               </div>
               <div className="calc-title">
                 <span>Buy Digital Assets</span>
-                <span className="calc-badge">Secure Desk</span>
+                <span 
+                  className="calc-badge"
+                  onClick={() => setIsAdminDashboardOpen(true)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Secure Desk
+                </span>
               </div>
 
               {/* Input field */}
@@ -1389,6 +1397,19 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Chat Components */}
+      <AnimatePresence>
+        {isUserChatOpen && (
+          <UserChat onClose={() => setIsUserChatOpen(false)} />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isAdminDashboardOpen && (
+          <AdminChatDashboard onClose={() => setIsAdminDashboardOpen(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
