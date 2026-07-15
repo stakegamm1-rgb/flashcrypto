@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, User, MessageSquare, Trash2, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { X, Send, User, MessageSquare, Trash2, Image as ImageIcon, Loader2, ArrowLeft } from 'lucide-react';
 import { db } from '../firebase';
 import { collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, doc, setDoc, deleteDoc, getDocs } from 'firebase/firestore';
 
@@ -318,6 +318,10 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
           display: flex;
           flex-direction: column;
           position: relative;
+          min-width: 0;
+        }
+        .mobile-back-btn {
+          display: none !important;
         }
         @media (max-width: 768px) {
           .admin-sidebar {
@@ -327,12 +331,16 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
           }
           .admin-chat-area {
             display: ${selectedChat ? 'flex' : 'none'} !important;
+            width: 100%;
           }
           .admin-page-container {
             border-radius: 0 !important;
             height: 100dvh !important;
-            max-width: 100% !important;
+            max-width: 100vw !important;
             border: none !important;
+          }
+          .mobile-back-btn {
+            display: flex !important;
           }
         }
       `}</style>
@@ -441,7 +449,29 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
                 flexDirection: 'column',
                 gap: '0.5rem'
               }}>
-                <h3 style={{ margin: 0, color: '#fff' }}>Chat with {selectedChat.userName || `User ${selectedChat.id.substring(0, 6)}`} {selectedChat.userCountry ? `from ${selectedChat.userCountry}` : ''}</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <button
+                    className="mobile-back-btn"
+                    onClick={() => setSelectedChat(null)}
+                    style={{
+                      background: 'rgba(255,255,255,0.1)',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '32px',
+                      height: '32px',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      cursor: 'pointer',
+                      flexShrink: 0
+                    }}
+                  >
+                    <ArrowLeft size={16} />
+                  </button>
+                  <h3 style={{ margin: 0, color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    Chat with {selectedChat.userName || `User ${selectedChat.id.substring(0, 6)}`} {selectedChat.userCountry ? `from ${selectedChat.userCountry}` : ''}
+                  </h3>
+                </div>
                 <button
                   onClick={handleDeleteChat}
                   style={{
@@ -482,7 +512,8 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
                         borderBottomLeftRadius: msg.sender !== 'admin' ? '4px' : '16px',
                         maxWidth: '85%',
                         wordBreak: 'break-word',
-                        overflowWrap: 'break-word',
+                        overflowWrap: 'anywhere',
+                        whiteSpace: 'pre-wrap',
                         fontSize: '0.95rem'
                       }}
                     >
@@ -500,6 +531,7 @@ export default function AdminChatDashboard({ onClose, isPage = false }) {
                 )}
                 <div ref={messagesEndRef} />
               </div>
+
 
               {/* Input */}
               <form 

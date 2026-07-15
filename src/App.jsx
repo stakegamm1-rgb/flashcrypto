@@ -46,6 +46,8 @@ import lisanceImg from './assets/Images/lisance.jpeg';
 import softwareImg from './assets/Images/software.png';
 
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { db } from './firebase';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 
 function Home() {
   const navigate = useNavigate();
@@ -60,6 +62,50 @@ function Home() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
+
+  // Global Notification Listener for incoming admin messages
+  useEffect(() => {
+    const id = localStorage.getItem('chatUserId');
+    if (!id) return;
+
+    let isInitialLoad = true;
+
+    if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission();
+    }
+
+    const q = query(collection(db, 'chats', id, 'messages'), orderBy('timestamp', 'asc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      if (isInitialLoad) {
+        isInitialLoad = false;
+        return;
+      }
+
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === 'added') {
+          const msg = change.doc.data();
+          if (msg.sender === 'admin' && !isUserChatOpen) {
+            // Play notification sound
+            try {
+              const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+              audio.play().catch(e => console.log('Audio playback blocked'));
+            } catch(e) {}
+
+            // Show browser notification
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification('New message from Flash Crypto Admin', {
+                body: msg.text || 'You received a new message.',
+              });
+            }
+          }
+        }
+      });
+    }, (error) => {
+      console.log('Notification listener error:', error);
+    });
+
+    return () => unsubscribe();
+  }, [isUserChatOpen]);
 
   // Calculator State
   const [calcAsset, setCalcAsset] = useState('USDT'); // 'USDT' or 'BTC'
