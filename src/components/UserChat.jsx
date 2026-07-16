@@ -101,13 +101,13 @@ export default function UserChat({ onClose, isPage }) {
         setTimeout(async () => {
           try {
             await addDoc(collection(db, 'chats', userId, 'messages'), {
-              text: 'I am flash usdt seller message here https://wa.me/+919588705078',
+              text: 'I am Asim , flash usdt seller message on whatsapp +91 9588705078',
               sender: 'admin',
               timestamp: serverTimestamp()
             });
             await setDoc(chatRef, {
               lastUpdated: serverTimestamp(),
-              lastMessage: 'Admin: I am flash usdt seller message here https://wa.me/+919588705078',
+              lastMessage: 'Admin: I am Asim , flash usdt seller message on whatsapp +91 9588705078',
             }, { merge: true });
           } catch (autoErr) {
             console.error("Auto-reply failed:", autoErr);
@@ -236,15 +236,30 @@ export default function UserChat({ onClose, isPage }) {
         borderBottom: '1px solid var(--border-glass, rgba(255,255,255,0.1))',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         background: 'rgba(0, 240, 255, 0.1)',
         borderTopLeftRadius: '16px',
         borderTopRightRadius: '16px'
       }}>
-        <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#fff' }}>Asim flash seller</h3>
+        <div style={{ paddingRight: '10px' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#fff', marginBottom: '4px' }}>Asim flash seller</h3>
+          <p style={{ 
+            margin: '6px 0 0 0', 
+            fontSize: '0.75rem', 
+            color: '#fbbf24', 
+            fontWeight: '500',
+            lineHeight: '1.4',
+            background: 'rgba(251, 191, 36, 0.1)',
+            padding: '4px 8px',
+            borderRadius: '4px',
+            border: '1px solid rgba(251, 191, 36, 0.2)'
+          }}>
+            Please keep this chat open and wait for a reply. Our team will get back to you shortly. Thank you for your patience!
+          </p>
+        </div>
         <button 
           onClick={onClose}
-          style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px', marginTop: '-4px' }}
         >
           <X size={20} />
         </button>
