@@ -447,6 +447,16 @@ function Home() {
                 <MessageCircle size={18} className="neon-text-green" />
                 Chat now
               </button>
+              <a 
+                href="https://wa.me/919588705078"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-glow btn-outline"
+                style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center', background: 'transparent', border: '1px solid #25D366', color: '#fff', cursor: 'pointer', fontFamily: 'inherit', fontSize: '1rem', padding: '0.75rem 1.5rem', borderRadius: '8px', textDecoration: 'none' }}
+              >
+                <MessageCircle size={18} style={{ color: '#25D366' }} />
+                Contact on WhatsApp
+              </a>
             </div>
           </motion.div>
 
